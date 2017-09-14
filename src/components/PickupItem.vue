@@ -1,24 +1,27 @@
 <template>
-  <q-card v-bind:class="{ full: data.isFull }">
-    <q-card-main v-if="data.description" class="row inline no-padding justify-between content"
-      v-bind:class="{ isUserMember: meta.isUserMember }">
+  <q-card v-bind:class="{ full: pickup.isFull }">
+    <q-card-main class="row inline no-padding justify-between content"
+      v-bind:class="{ isUserMember: pickup.isUserMember }">
       <div class="column padding">
         <div>
-          <h5>{{ data.date }}</h5>
-          <p>{{ data.description }}</p>
+          <h5>{{ pickup.date }}</h5>
+          <slot>
+            Date or Store slot
+          </slot>
+          <p>{{ pickup.description }}</p>
         </div>
         <div class="people">
           List of people who joined goes here...
         </div>
       </div>
       <div>
-        <q-btn v-if="!meta.isUserMember && !meta.isFull" @click="join" class="join full-height">
+        <q-btn v-if="!pickup.isUserMember && !pickup.isFull" @click="join" class="join full-height">
           &nbsp;Join
         </q-btn>
-        <q-btn v-if="meta.isFull && !meta.isUserMember" class="q-btn-flat full disabled full-height">
+        <q-btn v-if="pickup.isFull && !pickup.isUserMember" class="q-btn-flat full disabled full-height">
           &nbsp;Full
         </q-btn>
-        <q-btn v-if="meta.isUserMember" @click="leave" class="q-btn-flat leave full-height">
+        <q-btn v-if="pickup.isUserMember" @click="leave" class="q-btn-flat leave full-height">
           &nbsp;Leave
         </q-btn>
       </div>
@@ -31,10 +34,7 @@ import { QCardTitle, QCard, QCardMain, QCardSeparator, QCardActions, QBtn, QIcon
 
 export default {
   props: {
-    data: {
-      required: true
-    },
-    meta: {
+    pickup: {
       required: true
     }
   },

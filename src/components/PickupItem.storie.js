@@ -6,17 +6,14 @@ import PickupItem from './PickupItem.vue'
 storiesOf('PickupItem', module)
   .add('Join', () => ({
     components: { PickupItem },
-    template: '<div id="q-app"><pickup-item @join="join" :meta="meta" :data="data"></pickup-item></div>',
+    template: '<div id="q-app"><PickupItem @join="join" :pickup="pickup"></PickupItem></div>',
     data () {
       return {
-        data: {
+        pickup: {
           date: '12:00',
-          description: 'hello'
-        },
-        meta: {
+          description: 'hello',
           isFull: false,
-          isUserMember: false,
-          showStoreDetail: false
+          isUserMember: false
         }
       }
     },
@@ -26,14 +23,12 @@ storiesOf('PickupItem', module)
   }))
   .add('Full', () => ({
     components: { PickupItem },
-    template: '<div id="q-app"><pickup-item :meta="meta" :data="data"></pickup-item></div>',
+    template: '<div id="q-app"><PickupItem :pickup="pickup"></PickupItem></div>',
     data () {
       return {
-        data: {
+        pickup: {
           date: '00:00',
-          description: 'hello'
-        },
-        meta: {
+          description: 'hello',
           isFull: true,
           isUserMember: false
         }
@@ -42,14 +37,12 @@ storiesOf('PickupItem', module)
   }))
   .add('Leave', () => ({
     components: { PickupItem },
-    template: '<div id="q-app"><pickup-item @leave="leave" :meta="meta" :data="data"></pickup-item></div>',
+    template: '<div id="q-app"><PickupItem @leave="leave" :pickup="pickup"></PickupItem></div>',
     data () {
       return {
-        data: {
+        pickup: {
           date: '05:30 PM',
-          description: 'hello'
-        },
-        meta: {
+          description: 'hello',
           isFull: false,
           isUserMember: true
         }
