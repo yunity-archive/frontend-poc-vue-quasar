@@ -7,25 +7,30 @@
       <li><a href="https://gitter.im/quasarframework/Lobby" target="_blank" rel="noopener">Gitter Chat</a></li>
       <li><a href="https://twitter.com/quasarframework" target="_blank" rel="noopener">Twitter</a></li>
     </ul>
-    <group-list :groups="groups"/>
+    <group-list :groups="allGroups"/>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import GroupList from './GroupList'
 
 export default {
-  groups: [],
   components: {
     GroupList
   },
   computed: {
-    groups () {
-      return this.$store.getters.allGroups
-    }
+    ...mapGetters([
+      'allGroups'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'loadAllGroups'
+    ])
   },
   mounted () {
-    this.$store.dispatch('loadAllGroups')
+    this.loadAllGroups()
   }
 }
 </script>
